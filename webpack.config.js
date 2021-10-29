@@ -1,34 +1,43 @@
-const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin")
 
 module.exports = {
-  mode: "none",
-  entry: "./src/index.js",
+  mode: "production",
   output: {
-    path: __dirname + "/dist",
-    filename: "bundle.js"
+    filename: "tracker.js",
   },
-  devServer: {
-    contentBase: path.join(__dirname, "dist")
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
+    ],
   },
   module: {
     rules: [
-      // {
-      //   test: /\.css$/,
-      //   use: ["style-loader", "css-loader"]
-      // },
       {
-        // test: /\.js$/,
+        test: /\.?js$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: [["minify"]]
-          }
-        }
-      }
-    ]
-  }
-  //   optimization: {
-  //     runtimeChunk: true
-  //   }
-};
+            presets: [
+              ["minify"],
+              [
+                "@babel/preset-env",
+                {
+                  targets: ["defaults", "dead", "ie 6-8"],
+                },
+              ],
+            ],
+          },
+        },
+      },
+    ],
+  },
+}
