@@ -11,29 +11,20 @@
   </head>
   <body>
     <script src="bundle.js"></script>
-    <script>
+    <form
+      action="form.php"
+      onsubmit="AdopEvent(123456, 'event-test');return true;"
+    >
+      <p><input type="submit" value="test" /></p>
+    </form>
+    <!-- <script>
       var campaignId = 12345;
       var name = "name";
       var count = 1;
       var value = 1.02;
-      var params = window.location.search
-        .replace("?", "")
-        .split("&")
-        .reduce(function (p, e) {
-          var a = e.split("=");
-          p[decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
-          return p;
-        }, {});
-      var clickid = params["clickid"];
       window.onload = () => {
-        AdopEvent({
-          campaignId: campaignId,
-          name: name,
-          value: value,
-          count: count,
-          clickid: clickid
-        });
+        AdopEvent(campaignId, name, value, count);
       };
-    </script>
+    </script> -->
   </body>
 </html>

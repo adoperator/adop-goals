@@ -17,5 +17,8 @@
     "core-js": "^3.6.5",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "js-cookie": "^3.0.1"
   }
 }
