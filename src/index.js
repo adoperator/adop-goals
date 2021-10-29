@@ -3,7 +3,7 @@ import Cookies from "js-cookie"
 const clickid = /clickid=([^&=]+)/.exec(window.location.search)
 
 if (clickid) {
-  Cookies.set("ADOPCID", clickid[1])
+  Cookies.set("ADOPCID", clickid[1], { expires: 365 })
 }
 
 window.AdopEvent = function (campaignId, name, value = null, count = null) {
