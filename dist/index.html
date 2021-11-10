@@ -11,19 +11,15 @@
   </head>
   <body>
     <script src="tracker.js"></script>
-    <form
-      action="form.php"
-      onsubmit="AdopEvent(123456, 'event-test');return true;"
-    >
+    <form action="form.php" onsubmit="AdopEvent(123456);return true;">
       <p><input type="submit" value="test" /></p>
     </form>
     <!-- <script>
-      var campaignId = 12345;
-      var name = "name";
+      var goalId = 12345;
       var count = 1;
       var value = 1.02;
       window.onload = () => {
-        AdopEvent(campaignId, name, value, count);
+        AdopEvent(goalId, value, count);
       };
     </script> -->
   </body>
