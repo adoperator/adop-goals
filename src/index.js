@@ -28,7 +28,7 @@ window.AdopEvent = function (value = 0, count = null) {
   if (value) query += `&value=${value}`
   if (count) query += `&count=${count}`
 
-  img.src = `${window.location.protocol}//s2s.adoperator.com${query}`
+  img.src = `${window.location.protocol}//s2s.adoperator.com/conversion${query}`
 
   document.body.appendChild(img)
 }
