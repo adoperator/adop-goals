@@ -1,12 +1,17 @@
 import Cookies from "js-cookie"
 
-const clickid = /clickid=([^&=]+)/.exec(window.location.search)
+window.AdopEventInit = function (argName = "conversion") {
+  const re = new RegExp(`${argName}=([^&=]+)`)
+  const clickid = re.exec(window.location.search)
 
-if (clickid) {
-  Cookies.set("ADOPCID", clickid[1])
+  if (clickid) {
+    Cookies.set("ADOPCID", clickid[1])
+  }
 }
 
-window.AdopEvent = function (campaignId, name, value = null, count = null) {
+window.AdopEventInit()
+
+window.AdopEvent = function (value = 0, count = null) {
   const clickid = Cookies.get("ADOPCID")
 
   if (!clickid) {
@@ -18,12 +23,12 @@ window.AdopEvent = function (campaignId, name, value = null, count = null) {
   img.style.height = "1px"
   img.style.display = "none"
 
-  let query = `campaign_id=${campaignId}&name=${name}&clickid=${clickid}`
+  let query = `?c=${clickid}`
 
   if (value) query += `&value=${value}`
   if (count) query += `&count=${count}`
 
-  img.src = `${window.location.protocol}//newService?${query}`
+  img.src = `${window.location.protocol}//s2s.adoperator.com${query}`
 
   document.body.appendChild(img)
 }
