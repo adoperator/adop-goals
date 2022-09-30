@@ -5,7 +5,13 @@ window.AdopEventInit = function (argName = "conversion") {
   const clickid = re.exec(window.location.search)
 
   if (clickid) {
-    Cookies.set("ADOPCID", clickid[1])
+    const oldId = Cookies.get("ADOPCID")
+    if (oldId && oldId === clickid[1]) {
+      Cookies.set("adRepeat", true)
+    } else {
+      Cookies.set("ADOPCID", clickid[1])
+      Cookies.set("adRepeat", false)
+    }
   }
 }
 
@@ -13,8 +19,9 @@ window.AdopEventInit()
 
 window.AdopEvent = function (value = 0, count = null) {
   const clickid = Cookies.get("ADOPCID")
+  const repeat = Cookies.get("adRepeat")
 
-  if (!clickid) {
+  if (!clickid || repeat) {
     return false
   }
 
